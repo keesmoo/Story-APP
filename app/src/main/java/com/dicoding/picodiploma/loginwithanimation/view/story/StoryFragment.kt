@@ -47,13 +47,11 @@ class StoryFragment : Fragment() {
 
         recyclerView.adapter = storyAdapter
 
-        // Observe stories live data from ViewModel
         lifecycleScope.launch {
             val userRepository = UserRepository.getInstance(requireContext())
             userRepository.getSession().collect { userModel ->
                 val token = userModel.token
                 if (token.isNotEmpty()) {
-                    // Collect the PagingData and pass it to the adapter
                     viewModel.fetchStories(token, withLocation = true).collectLatest { pagingData: PagingData<Story> ->
                         storyAdapter.submitData(pagingData)
                     }
@@ -64,7 +62,6 @@ class StoryFragment : Fragment() {
             }
         }
 
-        // FAB for adding story
         val fabAddStory: FloatingActionButton = binding.findViewById(R.id.fabAddStory)
         fabAddStory.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -73,10 +70,8 @@ class StoryFragment : Fragment() {
                 .commit()
         }
 
-        // FAB for Maps
         val fabMaps: FloatingActionButton = binding.findViewById(R.id.fabMaps)
         fabMaps.setOnClickListener {
-            // Mengambil data stories dari PagingData yang telah di-submit ke adapter
             val stories = storyAdapter.snapshot().items
             if (stories.isNotEmpty()) {
                 val intent = Intent(requireContext(), MapsActivity::class.java)

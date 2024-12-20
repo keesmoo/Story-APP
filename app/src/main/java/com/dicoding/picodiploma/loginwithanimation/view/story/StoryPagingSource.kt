@@ -13,7 +13,7 @@ class StoryPagingSource(
 ) : PagingSource<Int, Story>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Story> {
-        val page = params.key ?: 1  // Halaman pertama adalah 1
+        val page = params.key ?: 1
         return try {
             val response = ApiConfig.getApiService().getStories("Bearer $token", location, page, params.loadSize)
             if (response.isSuccessful) {
@@ -34,7 +34,6 @@ class StoryPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, Story>): Int? {
-        // Mengembalikan halaman pertama saat refresh
         return state.anchorPosition?.let { state.closestPageToPosition(it)?.prevKey?.plus(1) }
     }
 }

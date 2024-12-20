@@ -61,16 +61,12 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
-
-    // AndroidX Core Testing for InstantTaskExecutorRule
     androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
     testImplementation ("androidx.arch.core:core-testing:2.1.0")
 
-    // Coroutines Testing
     androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
-    // Mockito
     testImplementation ("org.mockito:mockito-core:4.4.0")
     testImplementation ("org.mockito:mockito-inline:4.4.0")
     testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")

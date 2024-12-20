@@ -27,7 +27,6 @@ fun <T> LiveData<T>.getOrAwaitValue(
     try {
         afterObserve.invoke()
 
-        // Jangan tunggu tanpa batas jika LiveData tidak di-set.
         if (!latch.await(time, timeUnit)) {
             throw TimeoutException("LiveData value was never set.")
         }

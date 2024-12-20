@@ -28,29 +28,8 @@ class StoryViewModel : ViewModel() {
         pagingSourceFactory = { StoryPagingSource(token, if (withLocation) 1 else null) }
     ).flow
 
-    // The old approach, using a list, is still available for fallback
     private val _stories = MutableLiveData<List<Story>>()
     val stories: LiveData<List<Story>> = _stories
-
-//    fun fetchStoriesOld(token: String, withLocation: Boolean = false) {
-//        viewModelScope.launch {
-//            try {
-//                val locationParam = if (withLocation) 1 else null
-//                val response = ApiConfig.getApiService().getStories("Bearer $token", locationParam ?: 1)
-//                if (response.isSuccessful) {
-//                    val storiesList = response.body()?.listStory
-//                    _stories.postValue(storiesList)
-//                    storiesList?.forEach { story ->
-//                        Log.d("StoryViewModel", "Story ID: ${story.id}, Lat: ${story.lat}, Lon: ${story.lon}")
-//                    }
-//                } else {
-//                    _error.postValue("Failed to fetch stories")
-//                }
-//            } catch (e: Exception) {
-//                _error.postValue("Error: ${e.message}")
-//            }
-//        }
-//    }
 
     @VisibleForTesting
     fun setStoriesForTesting(stories: List<Story>) {
